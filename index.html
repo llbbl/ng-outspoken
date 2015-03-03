@@ -4,9 +4,10 @@
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.17/angular.min.js'></script>
     <script src='https://cdn.firebase.com/js/client/2.0.4/firebase.js'></script>
     <script src='https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js'></script>
+    <script src='https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js'></script>
     <script src='js/app.js'></script>
     <link rel="stylesheet" type="text/css" href='css/styles.css'></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -16,15 +17,48 @@
 
             <!-- ng-repeat over the items returned from Firebase data -->
             <li class="out-list" ng-repeat='item in data'>
+
                 <img ng-src="{{item.content_url}}" width="100" />
+
+                <hr/>
+
                 <span class="outHandle">{{item.handle}}</span>
                 <span class="outVotes">{{item.votes}}</span>
                 <span class="outMessage">{{item.message}}</span>
+
+                <hr/>
+
+                <div class="outRating" ng-controller="ratingController">
+
+                    <!-- Display weighted avergage of all ratings -->
+                    <p>Rating: {{rate}}</p>
+
+                    <!-- Display weighted avergage of all ratings -->
+                    <rating ng-model="rate" max="max" readonly="isReadonly" ng-click="voteTally(value)" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+
+
+                    <!--
+                        Show the percentage as users hover over
+                        and asign a bootstrap class based on percentages
+                    -->
+                    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+
+                    <!-- Testing purposes -->
+                    <pre style="margin:15px 0;">Readonly is: <b>{{isReadonly}}</b><br/>Hovering over: <b>{{overStar || "none"}}</b></pre>
+
+                    <button class="btn btn-sm btn-danger" ng-click="rate = 0" ng-disabled="isReadonly">Clear</button>
+                    <button class="btn btn-sm btn-default" ng-click="isReadonly = ! isReadonly">Toggle Readonly</button>
+
+                </div>
+
             </li>
 
         </ul>
 
     </div>
+
+
+
 
 </body>
 </html>
