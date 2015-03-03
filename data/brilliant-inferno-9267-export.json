@@ -1,0 +1,42 @@
+{
+  "station" : {
+    "hank" : {
+      "campaign_id" : {
+        "outspoken-feb-2015" : {
+          "contents" : {
+            "2015-02-27T20:24:11-06:00" : {
+              "content_url" : "https://pbs.twimg.com/media/B92y2J5CMAI6MxO.jpg",
+              "handle" : "@theDude99",
+              "id" : 10788081,
+              "img_thumb_url" : "",
+              "img_url" : "",
+              "is_type" : "twitter",
+              "message" : "RT @HankFM: WATCH: #AAAMMJ Recap Video starring: @thebandperry @ChrisYoungMusic @MaddieandTae @athousandhorses  - WHAT.A SHOW: http://t.co/â€¦",
+              "votes" : 0
+            },
+            "2015-03-01T20:24:11-06:00" : {
+              "content_url" : "https://pbs.twimg.com/media/B92y2J5CMAI6MxO.jpg",
+              "handle" : "@hockeyDude123",
+              "id" : 10788083,
+              "img_thumb_url" : "",
+              "img_url" : "",
+              "is_type" : "twitter",
+              "message" : "RT @HankFM: WATCH: #AAAMMJ Hockey is awesome starring: @athousandhorses: http://t.co/â€¦",
+              "votes" : 0
+            },
+            "2015-03-02T20:24:11-06:00" : {
+              "content_url" : "https://pbs.twimg.com/media/B92y2J5CMAI6MxO.jpg",
+              "handle" : "@mickeymouse15",
+              "id" : 10788082,
+              "img_thumb_url" : "",
+              "img_url" : "",
+              "is_type" : "twitter",
+              "message" : "RT @HankFM: WATCH: #AAAMMJ Recap Video starring: @thebandperry @ChrisYoungMusic @MaddieandTae @athousandhorses  - WHAT.A SHOW: http://t.co/â€¦",
+              "votes" : 0
+            }
+          }
+        }
+      }
+    }
+  }
+}

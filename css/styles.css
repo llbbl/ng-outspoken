@@ -1,0 +1,38 @@
+/***********************************/
+/**********  Global Styles  ********/
+/***********************************/
+* {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+body{font-family: sans-serif;}
+h1, h1 a{font-family: 'Oswald', sans-serif; font-weight: 400;font-size: 22px; color: #636567; text-transform: uppercase;    }
+h2 {font-family: 'Open Sans', sans-serif;font-size: 16px;}
+h3{font-family: 'Open Sans', sans-serif;font-size: 14px;}
+p{font-family: 'Open Sans', sans-serif;font-family: sans-serif;font-size: 12px;  color: #ffffff; }
+ul{list-style: none;}
+ul li{margin: 5px 0px; padding-left: 5px; font-size: 12px;}
+a{text-decoration: none;font-family: sans-serif;font-size: 14px;color: #696969;}
+.ed-wrapper{width: 100%; max-width:690px; margin: 0 auto;background: #f1f1f1;}
+
+/***********************************/
+/***********  Main Styles  *********/
+/***********************************/
+
+.ed-wrapper ul {
+    overflow: auto;
+    margin: 0;
+    padding: 0;
+}
+
+.ed-wrapper li {
+    float: left;
+    background: #6D6E71;
+    margin: 5px;
+    padding: 10px;
+    width: 100%;
+    max-width: 220px;
+    color: #ffffff;
+}
+
+.ed-wrapper li img {
+    width: 100%;
+    max-width: 200px;
+}
