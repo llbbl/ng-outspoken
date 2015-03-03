@@ -27,14 +27,16 @@
                 <span class="outMessage">{{item.message}}</span>
 
                 <hr/>
+                <span class="outMessage">{{item.count}}</span>
+                <hr/>
 
-                <div class="outRating" ng-controller="ratingController">
+                <div class="outRating">
 
                     <!-- Display weighted avergage of all ratings -->
                     <p>Rating: {{rate}}</p>
 
                     <!-- Display weighted avergage of all ratings -->
-                    <rating ng-model="rate" max="max" readonly="isReadonly" ng-click="voteTally(value)" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+                    <rating ng-model="rate" max="max" readonly="isReadonly" ng-click="voteTally(rate)" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
 
 
                     <!--

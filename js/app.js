@@ -31,38 +31,35 @@ app.controller("outController", ["$scope", "$firebase",
         $scope.data = $firebase(ref).$asArray();
         // $scope.data = sync.$asObject();
 
-        console.log($scope.data);
+        // Setup rating stars
+        $scope.rate = 0;            //  Set default rating to 0
+        $scope.max = 5;             //  Max number of stars
+        $scope.isReadonly = false;  //  Set readOnly to false by default
 
-
-    }
-
-
-]);
-
-
-app.controller('ratingController', function ($scope) {
-
-        $scope.rate = 0;
-        $scope.max = 5;
-        $scope.isReadonly = false;
-
-
+        // Calculates the percentage of stars
         $scope.hoveringOver = function(value) {
             $scope.overStar = value;
             $scope.percent = 100 * (value / $scope.max);
         };
 
-        $scope.voteTally = function (value) {
-            alert(value);
+        // Tallys the total amount of ratings
+        $scope.voteTally = function (el) {
+            // Increment firebase key
+            alert(el+ " - ");
         }
 
-    $scope.ratingStates = [
-        {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
-        {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
-        {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
-        {stateOn: 'glyphicon-heart'},
-        {stateOff: 'glyphicon-off'}
-    ];
+        $scope.ratingStates = [
+            {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
+            {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
+            {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
+            {stateOn: 'glyphicon-heart'},
+            {stateOff: 'glyphicon-off'}
+        ];
+
+        // Log Firebase object
+        console.log($scope.data);
+
+    }
 
 
-});
+]);
