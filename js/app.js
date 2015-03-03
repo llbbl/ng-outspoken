@@ -31,6 +31,12 @@ app.controller("outController", ["$scope", "$firebase",
         $scope.data = $firebase(ref).$asArray();
         // $scope.data = sync.$asObject();
 
+        // Log Firebase object
+        console.log($scope.data);
+
+
+
+
         // Setup rating stars
         $scope.rate = 0;            //  Set default rating to 0
         $scope.max = 5;             //  Max number of stars
@@ -44,10 +50,17 @@ app.controller("outController", ["$scope", "$firebase",
 
         // Tallys the total amount of ratings
         $scope.voteTally = function (el) {
-            // Increment firebase key
-            alert(el+ " - ");
+
+            //  Increment firebase total_count      (count)
+            //  Add up the value of the ratings     (count_cume)
+            //  weighted average = count/count_cume (rating)
+            alert(el);
+
+            $scope.data.$save($scope.data.count++)
+
         }
 
+        //  Star styles
         $scope.ratingStates = [
             {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
             {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
@@ -55,9 +68,6 @@ app.controller("outController", ["$scope", "$firebase",
             {stateOn: 'glyphicon-heart'},
             {stateOff: 'glyphicon-off'}
         ];
-
-        // Log Firebase object
-        console.log($scope.data);
 
     }
 

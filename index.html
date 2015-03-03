@@ -22,12 +22,16 @@
 
                 <hr/>
 
-                <span class="outHandle">{{item.handle}}</span>
-                <span class="outVotes">{{item.votes}}</span>
+                <span class="outHandle">{{item.handle}}</span><br/>
+                <span class="outVotes">{{item.votes}}</span><br/>
                 <span class="outMessage">{{item.message}}</span>
 
                 <hr/>
-                <span class="outMessage">{{item.count}}</span>
+
+                <span class="outMessage">Total count (a): {{item.count}}</span><br/>
+                <span class="outMessage">Cume of ratings (b): {{item.count_cume}}</span><br/>
+                <span class="outMessage">Weighted Average (a/b): {{item.rating}}</span>
+
                 <hr/>
 
                 <div class="outRating">
@@ -37,7 +41,6 @@
 
                     <!-- Display weighted avergage of all ratings -->
                     <rating ng-model="rate" max="max" readonly="isReadonly" ng-click="voteTally(rate)" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
-
 
                     <!--
                         Show the percentage as users hover over
@@ -58,9 +61,6 @@
         </ul>
 
     </div>
-
-
-
 
 </body>
 </html>
