@@ -11,57 +11,56 @@
 </head>
 <body>
 
-    <div class="ed-wrapper" ng-app="outApp">
+<div class="ed-wrapper" ng-app="outApp">
 
-        <ul class="outList" ng-controller="outController">
+    <ul class="outList" ng-controller="outController">
 
-            <!-- ng-repeat over the items returned from Firebase data -->
-            <li class="out-list" ng-repeat='item in data'>
+        <!-- ng-repeat over the items returned from Firebase data -->
+        <li class="out-list" ng-repeat='item in data'>
 
-                <img ng-src="{{item.content_url}}" width="100" />
+            <img ng-src="{{item.content_url}}" width="100" />
 
-                <hr/>
+            <hr/>
 
-                <span class="outHandle">{{item.handle}}</span><br/>
-                <span class="outMessage">{{item.message}}</span><br/>
-                <span class="outMessage">{{item.id}}</span><br/>
-                <span class="outMessage">{{item.rating}}</span>
+            <span class="outHandle">{{item.handle}}</span><br/>
+            <span class="outMessage">{{item.message}}</span><br/>
+            <span class="outMessage">id: {{item.id}}</span><br/>
 
-                <hr/>
+            <hr/>
 
-                <span class="outMessage">Total count (a): {{item.count}}</span><br/>
-                <span class="outMessage">Cume of ratings (b): {{item.count_total}}</span><br/>
-                <span class="outMessage">Weighted Average (a/b): {{item.rating}}</span>
+            <span class="outMessage">Total count (a): {{item.count}}</span><br/>
+            <span class="outMessage">Cume of ratings (b): {{item.count_total}}</span><br/>
+            <span class="outMessage">Weighted Average (a/b): {{item.rating}}</span>
 
-                <hr/>
+            <hr/>
 
-                <div class="outRating">
+            <div class="outRating">
 
-                    <!-- Display weighted avergage of all ratings -->
-                    <p>Rating: {{rate}}</p>
+                <!-- Display weighted avergage of all ratings -->
+                <p>Rating: {{item.rating}}</p>
 
-                    <!-- Display weighted avergage of all ratings -->
-                    <rating ng-model="rate" max="max" readonly="isReadonly" ng-click="voteTally(rate)" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+                <!-- Display weighted avergage of all ratings -->
+                <rating ng-model="rate" max="max" readonly="isReadonly" ng-click="voteTally(rate)" on-hover="hoveringOver(value)" on-leave="overStar = rating"></rating>
 
-                    <!--
-                        Show the percentage as users hover over
-                        and asign a bootstrap class based on percentages
-                    -->
-                    <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                <!--
+                    Show the percentage as users hover over
+                    and asign a bootstrap class based on percentages
+                -->
+                <!-- <span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span> -->
 
-                    <!-- Testing purposes -->
-                    <pre style="margin:15px 0;">Readonly is: <b>{{isReadonly}}</b><br/>Hovering over: <b>{{overStar || "none"}}</b></pre>
+                <!-- Testing purposes -->
+                <pre style="margin:15px 0;">{{item.count}}</b></pre>
 
-                    <button class="btn btn-sm btn-danger" ng-click="rate = 0" ng-disabled="isReadonly">Clear</button>
-                    <button class="btn btn-sm btn-default" ng-click="isReadonly = ! isReadonly">Toggle Readonly</button>
+              <!--   <button class="btn btn-sm btn-danger" ng-click="rate = 0" ng-disabled="isReadonly">Clear</button>
+                <button class="btn btn-sm btn-default" ng-click="isReadonly = ! isReadonly">Toggle Readonly</button> -->
 
-                </div>
+            </div>
 
-            </li>
+        </li>
 
-        </ul>
+    </ul>
 
-    </div>
+</div>
 
 </body>
 </html>

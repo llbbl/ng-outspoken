@@ -21,28 +21,28 @@ app.controller("outController", ["$scope", "$firebase",
 
     function($scope, $firebase) {
 
-        //  Reference to our Firebase data
-        var ref = new Firebase("https://brilliant-inferno-9267.firebaseio.com/station/hank/campaign_id/outspoken-feb-2015/contents");
+
+        var ref         = new Firebase("https://brilliant-inferno-9267.firebaseio.com/station/hank/campaign_id/outspoken-feb-2015/contents");
+        var obj         = $firebase(ref);                   //  Create an AngularFire reference to the data
+        $scope.data     = obj.$asArray();                   //  Download the data into a local object
+        var sync        = obj.$asObject();
+        obj.$asObject().$bindTo($scope, "data");            // synchronize the object with a three-way data binding
 
 
-        //  Create an AngularFire reference to the data
-        var sync = $firebase(ref);
+        sync.$loaded().then(function() {
+            console.log("sync ID:", sync.$id );             //  same thing as: $inst().$ref().key()
+        });
 
 
-        //  Download the data into a local object
-        $scope.data = sync.$asArray();
-        // $scope.data = sync.$asObject();
-
-
-        // Log Firebase object to console
-        console.log($scope.data);
+        console.log(sync);                                  // Log Firebase object to console
 
 
         // Setup rating stars
-        $scope.rate = 0;            //  Set default rating to 0
-        $scope.max = 5;             //  Max number of stars
-        $scope.isReadonly = false;  //  Set readOnly to false by default
+        $scope.rate = 0;                                    //  Set default rating to 0
+        $scope.max = 5;                                     //  Max number of stars
+        $scope.isReadonly = false;                          //  Set readOnly to false by default
         $scope.count = 0;
+
 
         // Calculates the percentage of stars
         $scope.hoveringOver = function(value) {
@@ -51,50 +51,77 @@ app.controller("outController", ["$scope", "$firebase",
         };
 
 
-        // Tallys the total amount of ratings
+        //  ====================================================================
+        //
+        //  1)  Increment total amount of votes
+        //  2)  Add up the value of the ratings
+        //  3)  weighted average = count/count_cume
+        //
+        //
         $scope.voteTally = function (el) {
 
-            var key = ref.key();
-            console.log(key)
+            var key = "2015-02-27T20:24:11-06:00"; // "2015-02-27T20:24:11-06:00"
+            var updateData = new Firebase("https://brilliant-inferno-9267.firebaseio.com/station/hank/campaign_id/outspoken-feb-2015/contents"+key);
 
-            // For example, if we just want to increment a counter, which we aren't displaying locally,
-            // we can just set it using the SDK
-            ref.child(key+"/count").transaction(function(el) {
-              // return (el || 0) + 1;
+            alert(el);
+            // updateData.$update({ count: el });
+
+            updateData.transaction(function(el) {
+                return ({ rating : el });
             });
-
-            // $scope.count = el;
 
             // replace some child nodes but leave the rest alone
             // var changedData = {count: , count_total: , baz: null};
             // sync.$update(changedData);
 
-
-            //  Increment total amount of votes
-            // ref.transaction( function (el) {
-
-            //     // alert(($scope.count || 0) +1);
-            //     // return (el || 0) + 1;
-
-            // });
-
-            //  Add up the value of the ratings     (count_cume)
-
-            //  weighted average = count/count_cume (rating)
-
         }
-
-
-        //  Star styles
-        $scope.ratingStates = [
-            {stateOn: 'glyphicon-ok-sign', stateOff: 'glyphicon-ok-circle'},
-            {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'},
-            {stateOn: 'glyphicon-heart', stateOff: 'glyphicon-ban-circle'},
-            {stateOn: 'glyphicon-heart'},
-            {stateOff: 'glyphicon-off'}
-        ];
 
     }
 
 
 ]);
+
+
+// app.controller('ModalDemoCtrl', function ($scope, $modal, $log) {
+
+//   $scope.items = ['item1', 'item2', 'item3'];
+
+//   $scope.open = function (size) {
+
+//     var modalInstance = $modal.open({
+//       templateUrl: 'myModalContent.html',
+//       controller: 'ModalInstanceCtrl',
+//       size: size,
+//       resolve: {
+//         items: function () {
+//           return $scope.items;
+//         }
+//       }
+//     });
+
+//     modalInstance.result.then(function (selectedItem) {
+//       $scope.selected = selectedItem;
+//     }, function () {
+//       $log.info('Modal dismissed at: ' + new Date());
+//     });
+//   };
+// });
+
+// // Please note that $modalInstance represents a modal window (instance) dependency.
+// // It is not the same as the $modal service used above.
+
+// app.controller('ModalInstanceCtrl', function ($scope, $modalInstance, items) {
+
+//   $scope.items = items;
+//   $scope.selected = {
+//     item: $scope.items[0]
+//   };
+
+//   $scope.ok = function () {
+//     $modalInstance.close($scope.selected.item);
+//   };
+
+//   $scope.cancel = function () {
+//     $modalInstance.dismiss('cancel');
+//   };
+// });
