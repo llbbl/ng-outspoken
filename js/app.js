@@ -24,23 +24,25 @@ app.controller("outController", ["$scope", "$firebase",
         //  Reference to our Firebase data
         var ref = new Firebase("https://brilliant-inferno-9267.firebaseio.com/station/hank/campaign_id/outspoken-feb-2015/contents");
 
+
         //  Create an AngularFire reference to the data
         var sync = $firebase(ref);
 
+
         //  Download the data into a local object
-        $scope.data = $firebase(ref).$asArray();
+        $scope.data = sync.$asArray();
         // $scope.data = sync.$asObject();
 
-        // Log Firebase object
+
+        // Log Firebase object to console
         console.log($scope.data);
-
-
 
 
         // Setup rating stars
         $scope.rate = 0;            //  Set default rating to 0
         $scope.max = 5;             //  Max number of stars
         $scope.isReadonly = false;  //  Set readOnly to false by default
+        $scope.count = 0;
 
         // Calculates the percentage of stars
         $scope.hoveringOver = function(value) {
@@ -48,17 +50,26 @@ app.controller("outController", ["$scope", "$firebase",
             $scope.percent = 100 * (value / $scope.max);
         };
 
+
         // Tallys the total amount of ratings
         $scope.voteTally = function (el) {
 
-            //  Increment firebase total_count      (count)
-            //  Add up the value of the ratings     (count_cume)
-            //  weighted average = count/count_cume (rating)
-            alert(el);
+            $scope.count = el;
 
-            $scope.data.$save($scope.data.count++)
+            //  Increment total amount of votes
+            ref.transaction( function (el) {
+
+                // alert(($scope.count || 0) +1);
+                // return (el || 0) + 1;
+
+            });
+
+            //  Add up the value of the ratings     (count_cume)
+
+            //  weighted average = count/count_cume (rating)
 
         }
+
 
         //  Star styles
         $scope.ratingStates = [
