@@ -54,15 +54,29 @@ app.controller("outController", ["$scope", "$firebase",
         // Tallys the total amount of ratings
         $scope.voteTally = function (el) {
 
-            $scope.count = el;
+            var key = ref.key();
+            console.log(key)
+
+            // For example, if we just want to increment a counter, which we aren't displaying locally,
+            // we can just set it using the SDK
+            ref.child(key+"/count").transaction(function(el) {
+              // return (el || 0) + 1;
+            });
+
+            // $scope.count = el;
+
+            // replace some child nodes but leave the rest alone
+            // var changedData = {count: , count_total: , baz: null};
+            // sync.$update(changedData);
+
 
             //  Increment total amount of votes
-            ref.transaction( function (el) {
+            // ref.transaction( function (el) {
 
-                // alert(($scope.count || 0) +1);
-                // return (el || 0) + 1;
+            //     // alert(($scope.count || 0) +1);
+            //     // return (el || 0) + 1;
 
-            });
+            // });
 
             //  Add up the value of the ratings     (count_cume)
 
