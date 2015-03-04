@@ -16,7 +16,7 @@ var app = angular.module("outApp", ["firebase", 'ui.bootstrap']);
 //
 //
 //
-app.controller("outController", ["$scope", "$firebase",
+app.controller("outController", ["$scope", "$firebase",     // add in the firebase submodule
 
 
     function($scope, $firebase) {
@@ -30,7 +30,7 @@ app.controller("outController", ["$scope", "$firebase",
 
 
         sync.$loaded().then(function() {
-            console.log("sync ID:", sync.$id );             //  same thing as: $inst().$ref().key()
+            // console.log("sync ID:", sync.$id );             //  same thing as: $inst().$ref().key()
         });
 
 
@@ -44,8 +44,7 @@ app.controller("outController", ["$scope", "$firebase",
         $scope.count = 0;
 
 
-        // Calculates the percentage of stars
-        $scope.hoveringOver = function(value) {
+        $scope.hoveringOver = function(value) {             // Calculates the percentage of stars
             $scope.overStar = value;
             $scope.percent = 100 * (value / $scope.max);
         };
@@ -61,13 +60,13 @@ app.controller("outController", ["$scope", "$firebase",
         $scope.voteTally = function (el) {
 
             var key = "2015-02-27T20:24:11-06:00"; // "2015-02-27T20:24:11-06:00"
-            var updateData = new Firebase("https://brilliant-inferno-9267.firebaseio.com/station/hank/campaign_id/outspoken-feb-2015/contents"+key);
+            var updateData = new Firebase("https://brilliant-inferno-9267.firebaseio.com/station/hank/campaign_id/outspoken-feb-2015/contents/2015-02-27T20:24:11-06:00");
 
-            alert(el);
+            console.log("Value from rating : " +el);
             // updateData.$update({ count: el });
 
             updateData.transaction(function(el) {
-                return ({ rating : el });
+                // return ({ rating : el });
             });
 
             // replace some child nodes but leave the rest alone
